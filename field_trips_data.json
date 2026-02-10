@@ -1,0 +1,60 @@
+{
+  "VMFA/STYLE": {
+    "name": "VMFA/STYLE",
+    "date": "December 1st, 2025",
+    "teacher": "Spencer Turner, Maude Kaufman",
+    "students": [
+      "Kiontai Barbour",
+      "Marcus Bells",
+      "Alex Morton",
+      "Zion Suirratt",
+      "David Botkin",
+      "Twanaya Russell",
+      "Ivyonna Tolliver",
+      "Michelle Mendez",
+      "Jay'Kyra Brown"
+    ],
+    "count": 9
+  },
+  "Richmond International Airport Conference-Greater Richmond Convention Center": {
+    "name": "Richmond International Airport Conference-Greater Richmond Convention Center",
+    "date": "11/21/2025",
+    "teacher": "Mr. Brown and Alana Stokes",
+    "students": [
+      "Laniya Young",
+      "Chance Hobbs",
+      "Zyrell Wilkerson",
+      "Kiontai Barbour",
+      "Daniyah Austin"
+    ],
+    "count": 5
+  },
+  "Tredegar": {
+    "name": "Tredegar",
+    "date": "February 24, 2025",
+    "teacher": "Spencer Turner, Dr. Lewis",
+    "students": [
+      "Kiontai Barbour",
+      "Marcus Bells",
+      "Alex Morton",
+      "Daniyah Austin"
+    ],
+    "count": 4
+  },
+  "CNU": {
+    "name": "CNU",
+    "date": "11/13/2025",
+    "teacher": "Mrs. Andrews",
+    "students": [
+      "Smith, Chance",
+      "Bells, DeMarcus",
+      "Smith, Ky",
+      "Carter, Ahkei",
+      "Parker, Devonte",
+      "Barbour, Kiontai",
+      "Yellardy, Tayonna",
+      "Summerville, BJ"
+    ],
+    "count": 8
+  }
+}

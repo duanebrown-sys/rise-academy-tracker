@@ -99,6 +99,56 @@ class StudentTracker {
         }
     }
 
+    // Helper function to normalize names for comparison
+    normalizeName(name) {
+        // Remove year indicators like '27, '26, etc.
+        let normalized = name.replace(/\s*'[0-9]{2}\s*$/, '').trim();
+        
+        // Convert "Last, First" to "First Last" or vice versa for comparison
+        // We'll create multiple variations to check
+        return normalized.toLowerCase();
+    }
+
+    // Check if two names match (handles different formats)
+    namesMatch(name1, name2) {
+        const n1 = this.normalizeName(name1);
+        const n2 = this.normalizeName(name2);
+        
+        // Direct match
+        if (n1 === n2) return true;
+        
+        // Extract first and last names for both
+        let parts1, parts2;
+        
+        if (name1.includes(',')) {
+            // Format: "Last, First"
+            parts1 = name1.split(',').map(p => p.trim().replace(/\s*'[0-9]{2}\s*$/, '').trim());
+            parts1 = [parts1[1], parts1[0]]; // [First, Last]
+        } else {
+            // Format: "First Last"
+            parts1 = name1.split(' ').map(p => p.trim());
+        }
+        
+        if (name2.includes(',')) {
+            parts2 = name2.split(',').map(p => p.trim().replace(/\s*'[0-9]{2}\s*$/, '').trim());
+            parts2 = [parts2[1], parts2[0]];
+        } else {
+            parts2 = name2.split(' ').map(p => p.trim());
+        }
+        
+        // Compare first and last names (case insensitive)
+        if (parts1.length >= 2 && parts2.length >= 2) {
+            const firstName1 = parts1[0].toLowerCase();
+            const lastName1 = parts1[parts1.length - 1].toLowerCase();
+            const firstName2 = parts2[0].toLowerCase();
+            const lastName2 = parts2[parts2.length - 1].toLowerCase();
+            
+            return firstName1 === firstName2 && lastName1 === lastName2;
+        }
+        
+        return false;
+    }
+
     displayStudentProgress() {
         const results = document.getElementById('results');
         
@@ -112,10 +162,13 @@ class StudentTracker {
             return;
         }
 
-        // Find all field trips this student attended
+        // Find all field trips this student attended using flexible name matching
         const attendedTrips = [];
         for (const [tripName, tripData] of Object.entries(this.fieldTrips)) {
-            if (tripData.students.includes(this.currentStudent.name)) {
+            const attended = tripData.students.some(studentName => 
+                this.namesMatch(this.currentStudent.name, studentName)
+            );
+            if (attended) {
                 attendedTrips.push(tripData);
             }
         }
@@ -150,7 +203,9 @@ class StudentTracker {
                 <h3>Field Trips Progress</h3>
                 <div class="trip-list">
                     ${allTrips.map(trip => {
-                        const completed = trip.students.includes(this.currentStudent.name);
+                        const completed = trip.students.some(studentName => 
+                            this.namesMatch(this.currentStudent.name, studentName)
+                        );
                         return `
                             <div class="trip-item">
                                 <div class="trip-info">
